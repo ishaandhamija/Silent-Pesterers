@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView allContactsRV;
     AllContactsAdapter allContactsAdapter;
-    ArrayList<ContactDetails> allContactsArrayList;
+    public static ArrayList<ContactDetails> allContactsArrayList;
     DBHelper mydb;
     public static OnDelete onDelete;
 
@@ -119,21 +119,25 @@ public class MainActivity extends AppCompatActivity {
     void displayContacts(){
         allContactsArrayList.clear();
         Cursor res = mydb.getAllData();
-        if (res.getCount() != 0) {
-            while (res.moveToNext()) {
-                Log.d(TAG, "onClick: " + res.getString(1));
-                Log.d(TAG, "onClick: " + res.getString(2));
-                Log.d(TAG, "onClick: " + "-----------------------");
-                allContactsArrayList.add(new ContactDetails(res.getString(1), res.getString(2), null));
-            }
-            allContactsRV = (RecyclerView) findViewById(R.id.rvList);
-            allContactsAdapter = new AllContactsAdapter(this, allContactsArrayList);
-            allContactsRV.setLayoutManager(new LinearLayoutManager(this));
-            allContactsRV.setAdapter(allContactsAdapter);
-
-        } else {
-            Toast.makeText(MainActivity.this, "No Numbers Added", Toast.LENGTH_LONG).show();
+        while (res.moveToNext()) {
+            Log.d(TAG, "onClick: " + res.getString(1));
+            Log.d(TAG, "onClick: " + res.getString(2));
+            Log.d(TAG, "onClick: " + "-----------------------");
+            allContactsArrayList.add(new ContactDetails(res.getString(1), res.getString(2), null));
         }
+        allContactsRV = (RecyclerView) findViewById(R.id.rvList);
+        allContactsAdapter = new AllContactsAdapter(this, allContactsArrayList);
+        allContactsRV.setLayoutManager(new LinearLayoutManager(this));
+        allContactsRV.setAdapter(allContactsAdapter);
+
+        if (res.getCount() == 0){
+            Toast.makeText(this, "No Numbers Added ", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public static ArrayList<ContactDetails> getAllContactsArrayList(){
+        return allContactsArrayList;
     }
 
 }
