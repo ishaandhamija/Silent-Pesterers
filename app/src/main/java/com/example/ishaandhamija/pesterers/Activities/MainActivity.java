@@ -51,27 +51,13 @@ public class MainActivity extends AppCompatActivity {
 
         mydb = new DBHelper(MainActivity.this);
         allContactsArrayList = new ArrayList<>();
-
-        Cursor res = mydb.getAllData();
-        if (res.getCount() != 0) {
-            while (res.moveToNext()) {
-                Log.d(TAG, "onClick: " + res.getString(1));
-                Log.d(TAG, "onClick: " + res.getString(2));
-                Log.d(TAG, "onClick: " + "-----------------------");
-                allContactsArrayList.add(new ContactDetails(res.getString(1), res.getString(2), null));
-            }
-            allContactsRV = (RecyclerView) findViewById(R.id.rvList);
-            allContactsAdapter = new AllContactsAdapter(this, allContactsArrayList);
-            allContactsRV.setLayoutManager(new LinearLayoutManager(this));
-            allContactsRV.setAdapter(allContactsAdapter);
-
-        } else {
-            Toast.makeText(MainActivity.this, "No Numbers Added", Toast.LENGTH_LONG).show();
-        }
+        
+        displayContacts();
 
         onDelete = new OnDelete() {
             @Override
             public void onDel() {
+                displayContacts();
             }
         };
 
@@ -128,6 +114,26 @@ public class MainActivity extends AppCompatActivity {
 
     public static OnDelete getOnDelete(){
         return onDelete;
+    }
+    
+    void displayContacts(){
+        allContactsArrayList.clear();
+        Cursor res = mydb.getAllData();
+        if (res.getCount() != 0) {
+            while (res.moveToNext()) {
+                Log.d(TAG, "onClick: " + res.getString(1));
+                Log.d(TAG, "onClick: " + res.getString(2));
+                Log.d(TAG, "onClick: " + "-----------------------");
+                allContactsArrayList.add(new ContactDetails(res.getString(1), res.getString(2), null));
+            }
+            allContactsRV = (RecyclerView) findViewById(R.id.rvList);
+            allContactsAdapter = new AllContactsAdapter(this, allContactsArrayList);
+            allContactsRV.setLayoutManager(new LinearLayoutManager(this));
+            allContactsRV.setAdapter(allContactsAdapter);
+
+        } else {
+            Toast.makeText(MainActivity.this, "No Numbers Added", Toast.LENGTH_LONG).show();
+        }
     }
 
 }
