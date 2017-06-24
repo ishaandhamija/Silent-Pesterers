@@ -1,15 +1,20 @@
 package com.example.ishaandhamija.pesterers.Activities;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -41,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "Yolo";
     static final int PICK_CONTACT = 1001;
+    static final int REQ_CODE = 1991;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +57,19 @@ public class MainActivity extends AppCompatActivity {
 
         mydb = new DBHelper(MainActivity.this);
         allContactsArrayList = new ArrayList<>();
-        
-        displayContacts();
+
+        int readContactsPerm = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS);
+        int readPhoneStatePerm = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
+
+        if ((readContactsPerm != PackageManager.PERMISSION_GRANTED) || (readPhoneStatePerm != PackageManager.PERMISSION_GRANTED)){
+            ActivityCompat.requestPermissions(this, new String[]{
+                    Manifest.permission.READ_CONTACTS,
+                    Manifest.permission.READ_PHONE_STATE
+            }, REQ_CODE);
+        }
+        else {
+            displayContacts();
+        }
 
         onDelete = new OnDelete() {
             @Override
@@ -131,13 +148,30 @@ public class MainActivity extends AppCompatActivity {
         allContactsRV.setAdapter(allContactsAdapter);
 
         if (res.getCount() == 0){
-            Toast.makeText(this, "No Numbers Added ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No Numbers Added", Toast.LENGTH_SHORT).show();
         }
 
     }
 
     public static ArrayList<ContactDetails> getAllContactsArrayList(){
         return allContactsArrayList;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        if (requestCode == REQ_CODE) {
+            for (int result : grantResults) {
+                if (result == PackageManager.PERMISSION_DENIED) {
+                    Toast.makeText(this, "Permission Not Given", Toast.LENGTH_SHORT).show();
+                    finish();
+                    return;
+                }
+            }
+            displayContacts();
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
 }
