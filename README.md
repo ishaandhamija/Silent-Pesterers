@@ -1,6 +1,15 @@
 # Silent-Pesterers
 This Android App helps you to avoid the calls of the people you don't want to talk to !! You can create a list of people, you don't want to talk to and the app will not let your mobile ring when anyone from the list will call !!
 
+<<<<<<< HEAD
+=======
+## Key Features
+TelephonyManager, Broadcast Receiver, PhoneNumberUtils, SQLite Database and Recyclerview.
+
+## Motivation
+Want to avoid calls of someone really annoying !!
+
+>>>>>>> 858d39073bf833baa194e74e376cf92b853af1bb
 ## ScreenShots
 
 <img src = "https://user-images.githubusercontent.com/14792027/27526553-606f1b68-5a64-11e7-8921-977f75978d92.png" width=350> <img src = "https://user-images.githubusercontent.com/14792027/27526661-0a85bdaa-5a65-11e7-8f1c-711ccfa5faf1.png" width=350>
