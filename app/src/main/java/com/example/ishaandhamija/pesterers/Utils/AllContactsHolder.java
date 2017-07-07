@@ -2,6 +2,8 @@ package com.example.ishaandhamija.pesterers.Utils;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.shapes.Shape;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,8 +26,9 @@ import java.util.ArrayList;
 
 public class AllContactsHolder extends RecyclerView.ViewHolder {
 
-    ImageView allContactsPhoto;
+    TextView allContactsLetter;
     TextView allContactsName, allContactsNumber;
+    View contactColor;
     View view;
     DBHelper mydb;
 
@@ -33,8 +36,10 @@ public class AllContactsHolder extends RecyclerView.ViewHolder {
         super(itemView);
 
         this.allContactsName = (TextView) itemView.findViewById(R.id.allContactsName);
-        this.allContactsPhoto = (ImageView) itemView.findViewById(R.id.allContactsPhoto);
         this.allContactsNumber = (TextView) itemView.findViewById(R.id.allContactsNumber);
+        this.allContactsLetter = (TextView) itemView.findViewById(R.id.contactLetter);
+        this.contactColor = itemView.findViewById(R.id.contactColor);
+
         this.view = itemView;
 
         mydb = new DBHelper(ctx);

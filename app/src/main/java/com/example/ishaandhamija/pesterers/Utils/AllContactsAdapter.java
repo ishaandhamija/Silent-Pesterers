@@ -1,6 +1,13 @@
 package com.example.ishaandhamija.pesterers.Utils;
 
+import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Context;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +17,8 @@ import android.widget.CheckBox;
 import com.example.ishaandhamija.pesterers.DBUtils.ContactDetails;
 import com.example.ishaandhamija.pesterers.R;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -39,7 +48,7 @@ public class AllContactsAdapter extends RecyclerView.Adapter<AllContactsHolder> 
         final ContactDetails contactDetails = allContactsArrayList.get(position);
         holder.allContactsName.setText(contactDetails.getName());
         holder.allContactsNumber.setText(contactDetails.getNumber());
-//        holder.allContactsPhoto.setImageResource(Integer.parseInt(contactDetails.getPhoto()));
+        holder.allContactsLetter.setText(Character.toString(contactDetails.getName().charAt(0)));
     }
 
     @Override

@@ -3,10 +3,16 @@ package com.example.ishaandhamija.pesterers.Activities;
 import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.ContentUris;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -26,6 +32,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ishaandhamija.pesterers.DBUtils.ContactDetails;
@@ -35,6 +42,8 @@ import com.example.ishaandhamija.pesterers.R;
 import com.example.ishaandhamija.pesterers.Utils.AllContactsAdapter;
 import com.example.ishaandhamija.pesterers.Utils.AllContactsHolder;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -118,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         String name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
                         Log.d(TAG, "onActivityResult: " + name);
+
                         boolean x = mydb.insertData(name, cNumber, null);
                         allContactsArrayList.add(new ContactDetails(name, cNumber, null));
                         allContactsAdapter.notifyDataSetChanged();
@@ -192,5 +202,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

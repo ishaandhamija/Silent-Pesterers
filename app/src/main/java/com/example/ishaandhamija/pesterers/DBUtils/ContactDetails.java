@@ -1,5 +1,7 @@
 package com.example.ishaandhamija.pesterers.DBUtils;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by ishaandhamija on 24/06/17.
  */
