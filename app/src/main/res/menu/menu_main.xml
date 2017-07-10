@@ -2,9 +2,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.ishaandhamija.pesterers.Activities.MainActivity">
+
+    <item
+        android:id="@+id/removeAll"
+        android:orderInCategory="100"
+        android:title="Remove All"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/about"
         android:orderInCategory="100"
-        android:title="About"
+        android:title="Developer Info"
         app:showAsAction="never" />
+
 </menu>

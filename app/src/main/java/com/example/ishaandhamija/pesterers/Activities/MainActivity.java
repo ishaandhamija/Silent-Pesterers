@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -21,6 +22,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -196,10 +198,35 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        if (item.getItemId() == R.id.about){
-            Toast.makeText(this, "About mein Jayenge", Toast.LENGTH_SHORT).show();
+        if (item.getItemId() == R.id.removeAll){
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+            alertDialog.setTitle("Remove All Contacts");
+            alertDialog.setMessage("Are you sure you want remove all contacts?");
+            alertDialog.setIcon(R.mipmap.ic_bin);
+
+            alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog,int which) {
+                    mydb.deleteTable();
+                    displayContacts();
+                }
+            });
+
+            alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            alertDialog.show();
             return true;
         }
+
+        if (item.getItemId() == R.id.about){
+            startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }

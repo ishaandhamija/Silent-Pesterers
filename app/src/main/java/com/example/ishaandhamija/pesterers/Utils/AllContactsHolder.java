@@ -2,7 +2,10 @@ package com.example.ishaandhamija.pesterers.Utils;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.Shape;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -28,9 +31,11 @@ public class AllContactsHolder extends RecyclerView.ViewHolder {
 
     TextView allContactsLetter;
     TextView allContactsName, allContactsNumber;
+    ImageView circle;
     View contactColor;
     View view;
     DBHelper mydb;
+    GradientDrawable gd;
 
     public AllContactsHolder(View itemView, final Context ctx) {
         super(itemView);
@@ -39,6 +44,8 @@ public class AllContactsHolder extends RecyclerView.ViewHolder {
         this.allContactsNumber = (TextView) itemView.findViewById(R.id.allContactsNumber);
         this.allContactsLetter = (TextView) itemView.findViewById(R.id.contactLetter);
         this.contactColor = itemView.findViewById(R.id.contactColor);
+        circle = (ImageView) itemView.findViewById(R.id.circle);
+        gd = (GradientDrawable) circle.getBackground();
 
         this.view = itemView;
 
@@ -56,7 +63,6 @@ public class AllContactsHolder extends RecyclerView.ViewHolder {
                 alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int which) {
                         mydb.deleteData(allContactsNumber.getText().toString().trim());
-                        Log.d("UU", "onClick: " + MainActivity.getOnDelete());
                         MainActivity.getOnDelete().onDel();
                     }
                 });

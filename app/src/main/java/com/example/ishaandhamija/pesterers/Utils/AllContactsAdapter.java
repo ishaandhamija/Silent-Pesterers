@@ -6,9 +6,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +51,24 @@ public class AllContactsAdapter extends RecyclerView.Adapter<AllContactsHolder> 
         holder.allContactsName.setText(contactDetails.getName());
         holder.allContactsNumber.setText(contactDetails.getNumber());
         holder.allContactsLetter.setText(Character.toString(contactDetails.getName().charAt(0)));
+        if (position % 6 == 0){
+            holder.gd.setColor(Color.parseColor("#FF0000"));
+        }
+        if (position % 6 == 1) {
+            holder.gd.setColor(Color.BLUE);
+        }
+        if (position % 6 == 2){
+            holder.gd.setColor(Color.parseColor("#008000"));
+        }
+        if (position % 6 == 3){
+            holder.gd.setColor(Color.parseColor("#FFA500"));
+        }
+        if (position % 6 == 4){
+            holder.gd.setColor(Color.parseColor("#800000"));
+        }
+        if (position % 6 == 5){
+            holder.gd.setColor(Color.parseColor("#191970"));
+        }
     }
 
     @Override

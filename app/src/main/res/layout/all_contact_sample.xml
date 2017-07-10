@@ -13,13 +13,14 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/circle"/>
+            android:background="@drawable/circle"
+            android:id="@+id/circle"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Z"
+            android:text="I"
             android:textColor="#FFF"
             android:textSize="25sp"
             android:id="@+id/contactLetter"/>
