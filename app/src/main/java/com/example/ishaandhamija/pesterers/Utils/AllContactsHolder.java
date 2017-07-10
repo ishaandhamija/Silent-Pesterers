@@ -55,7 +55,7 @@ public class AllContactsHolder extends RecyclerView.ViewHolder {
 
                 alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int which) {
-                        mydb.deleteData(allContactsName.getText().toString().trim());
+                        mydb.deleteData(allContactsNumber.getText().toString().trim());
                         Log.d("UU", "onClick: " + MainActivity.getOnDelete());
                         MainActivity.getOnDelete().onDel();
                     }

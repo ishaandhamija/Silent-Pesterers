@@ -53,10 +53,10 @@ public class DBHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public void deleteData(String name)
+    public void deleteData(String number)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + COL_2 + "= '" + name + "'");
+        db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + COL_3 + "= '" + number + "'");
     }
 
     public Cursor getAllData() {
