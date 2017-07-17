@@ -24,7 +24,7 @@ public class PhoneStateReceiver extends BroadcastReceiver {
     AudioManager audioManager;
     DBHelper mydb;
     ArrayList<String> numbersList;
-    int[] initialState = new int[10];
+    static int initialState;
     int k = 0;
 
     @Override
@@ -40,9 +40,8 @@ public class PhoneStateReceiver extends BroadcastReceiver {
         }
 
         if (intent.getStringExtra(TelephonyManager.EXTRA_STATE).equals(TelephonyManager.EXTRA_STATE_RINGING)){
-            initialState[k++] = audioManager.getRingerMode();
+            initialState = audioManager.getRingerMode();
 
-            Log.d("BCBC", "onReceive: Pehla = " + initialState[0]);
             String incomingNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
             if (numbersList != null){
                 for (int i=0;i<numbersList.size();i++){
@@ -56,10 +55,9 @@ public class PhoneStateReceiver extends BroadcastReceiver {
         }
 
         else if (intent.getStringExtra(TelephonyManager.EXTRA_STATE).equals(TelephonyManager.EXTRA_STATE_IDLE)){
-            Log.d("BCBC", "onReceive: Dusra = " + initialState[0]);
-//            if (initialState == 2) {
+            if (initialState == 2) {
                 audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-//            }
+            }
         }
 
     }
